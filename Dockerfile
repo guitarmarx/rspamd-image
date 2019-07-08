@@ -1,26 +1,31 @@
-FROM debian:9.4-slim
+FROM alpine:3.10.0
 
 LABEL maintainer="meteorIT GbR Marcus Kastner"
 
 EXPOSE 11332 11333
 
-ENV WEB_PASSWORD=test\
-	SPAM_IMPORT_FOLDER=/tmp/spam \
-	GLOBAL_DNS=46.38.252.230 \
-	MAX_MEMORY=512mb
+ENV WEB_PASSWORD=password \
+	SPAM_IMPORT_FOLDER=/srv/spam \
+	GLOBAL_DNS=8.8.8.8 \
+	MAX_MEMORY=512mb \
+	DOCKERIZE_VERSION=v0.6.1 \
+	REDIS_SERVER="<redisserver>"
 
-RUN apt update  \
-	&& apt install -y wget lsb-release gnupg2 gettext redis-server \
-	&& wget -O- https://rspamd.com/apt-stable/gpg.key | apt-key add - \
-	&& CODENAME=`lsb_release -c -s`\
-	&& echo "deb http://rspamd.com/apt-stable/ $CODENAME main" > /etc/apt/sources.list.d/rspamd.list\
-	&& echo "deb-src http://rspamd.com/apt-stable/ $CODENAME main" >> /etc/apt/sources.list.d/rspamd.list\
-	&& apt update \
-	&& apt install --no-install-recommends -y rspamd \
-	&& rm -rf /var/lib/apt/lists/*
 
-ADD * /tmp/
+RUN apk update \
+	&& apk --no-cache add curl ca-certificates rspamd rspamd-controller curl \
+	&&  rm -rf /var/cache/apk/*
+#rsyslog
 
-RUN chmod 755 /tmp/entrypoint.sh
+# download dockerize
+RUN curl -L https://github.com/jwilder/dockerize/releases/download/$DOCKERIZE_VERSION/dockerize-linux-amd64-${DOCKERIZE_VERSION}.tar.gz --output /tmp/dockerize.tar.gz  \
+	&& tar -C /usr/local/bin -xzvf /tmp/dockerize.tar.gz \
+	&& rm /tmp/dockerize.tar.gz
 
-ENTRYPOINT ["/tmp/entrypoint.sh"]
+ADD templates /srv/
+ADD scripts /srv/
+
+RUN mkdir -p $SPAM_IMPORT_FOLDER \
+	&& chmod 755 /srv/scripts/*
+
+ENTRYPOINT ["/srv/scripts/entrypoint.sh"]
