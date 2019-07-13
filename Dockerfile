@@ -23,8 +23,8 @@ RUN curl -L https://github.com/jwilder/dockerize/releases/download/$DOCKERIZE_VE
 	&& tar -C /usr/local/bin -xzvf /tmp/dockerize.tar.gz \
 	&& rm /tmp/dockerize.tar.gz
 
-ADD templates /srv/
-ADD scripts /srv/
+COPY templates /srv/templates
+COPY scripts /srv/scripts
 
 RUN mkdir -p $SPAM_IMPORT_FOLDER \
 	&& chmod 755 /srv/scripts/*
