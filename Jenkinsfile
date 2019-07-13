@@ -2,9 +2,8 @@ pipeline {
     agent {label 'build'}
     environment{
         dockerRegistry='registry.meteorit-leipzig.de'
-        image=rspamd
-        version=${BRANCH_NAME}
-
+        image="rspamd"
+        version="${BRANCH_NAME}"
     }
     stages {
         stage('Build Image'){
