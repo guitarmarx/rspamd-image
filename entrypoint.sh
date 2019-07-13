@@ -3,15 +3,16 @@
 #crontab
 echo "0 * * * * /srv/scripts/importMail.sh" | crontab -
 
+##### RSPAMD CONFIG #####
+WEB_PASSWORD=$(rspamadm pw -p $WEB_PASSWORD)
+dockerize -template /srv/templates/:/etc/rspamd/local.d/
+
+# add whitelist
+ echo $DOMAIN_WHITELIST | tr -s ',' '\n' > /etc/rspamd/local.d/whitelist.sender.domain.map
+
 # start cron
 crond &
 
-##### RSPAMD CONFIG #####
-WEB_PASSWORD=$(rspamadm pw -p $WEB_PASSWORD)
-
-cp /srv/rspamd_templates/*  /etc/rspamd/local.d
-dockerize -template /srv/templates/options.inc.tmpl:/etc/rspamd/local.d/options.inc
-dockerize -template /srv/templates/worker-controller.inc.tmpl:/etc/rspamd/local.d/worker-controller.inc
 
 #### SERVICE START #####
 rspamd --no-fork -u rspamd -g rspamd -c /etc/rspamd/rspamd.conf
