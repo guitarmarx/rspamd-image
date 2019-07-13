@@ -4,6 +4,7 @@ pipeline {
         dockerRegistry='registry.meteorit-leipzig.de'
         image=rspamd
         version=${BRANCH_NAME}
+
     }
     stages {
         stage('Build Image'){
@@ -16,8 +17,8 @@ pipeline {
         stage('Push image') {
             steps {
                  withDockerRegistry([ credentialsId: 'docker-registry-credential', url: 'https://' + dockerRegistry ]) {
-                    sh "docker push $$image:version"
-                }
+                    sh "docker push $image:$version"
+                 }
             }
         }
     }

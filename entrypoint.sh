@@ -13,6 +13,5 @@ dockerize -template /srv/templates/:/etc/rspamd/local.d/
 # start cron
 crond &
 
-
 #### SERVICE START #####
 rspamd --no-fork -u rspamd -g rspamd -c /etc/rspamd/rspamd.conf
