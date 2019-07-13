@@ -9,14 +9,14 @@ pipeline {
         stage('Build Image'){
             steps{
                 script {
-                    sh "docker build --no-cache  -t $image:$version ."
+                    sh "docker build --no-cache  -t $dockerRegistry/$image:$version ."
                 }
             }
         }
         stage('Push image') {
             steps {
                  withDockerRegistry([ credentialsId: 'docker-registry-credential', url: 'https://' + dockerRegistry ]) {
-                    sh "docker push $image:$version"
+                    sh "docker push dockerRegistry/$image:$version"
                  }
             }
         }
