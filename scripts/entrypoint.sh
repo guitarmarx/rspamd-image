@@ -8,7 +8,8 @@ WEB_PASSWORD=$(rspamadm pw -p $WEB_PASSWORD)
 dockerize -template /srv/templates/:/etc/rspamd/local.d/
 
 # add whitelist
- echo $DOMAIN_WHITELIST | tr -s ',' '\n' > /etc/rspamd/local.d/whitelist.sender.domain.map
+echo $DOMAIN_WHITELIST | tr -s ',' '\n' > /etc/rspamd/local.d/whitelist.sender.domain.map
+chown -R rspamd:rspamd /etc/rspamd/
 
 # start cron
 crond &
