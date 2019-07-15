@@ -2,7 +2,7 @@ FROM alpine:3.10.0
 
 LABEL maintainer="meteorIT GbR Marcus Kastner"
 
-EXPOSE 11332 11333
+EXPOSE 11333 11334
 
 ENV WEB_PASSWORD=password \
 	SPAM_IMPORT_FOLDER=/srv/spam \
