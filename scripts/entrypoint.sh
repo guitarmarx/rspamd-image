@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 
 #crontab
 echo "0 * * * * /srv/scripts/importMail.sh" | crontab -
