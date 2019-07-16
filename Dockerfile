@@ -10,7 +10,10 @@ ENV WEB_PASSWORD=password \
 	MAX_MEMORY=512mb \
 	DOMAIN_WHITELIST=''\
 	DOCKERIZE_VERSION=v0.6.1 \
-	REDIS_SERVER="<redisserver>"
+	REDIS_SERVER="<redisserver>" \
+	REJECT_VALUE=15 \
+	ADD_HEADER_VALUE=6 \
+	GREYLIST_VALUE=4
 
 
 RUN apk update \
