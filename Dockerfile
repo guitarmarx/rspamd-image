@@ -2,6 +2,8 @@ FROM alpine:3.10.0
 
 LABEL maintainer="meteorIT GbR Marcus Kastner"
 
+VOLUME /var/lib/rspamd/
+
 EXPOSE 11332 11334
 
 ENV WEB_PASSWORD=password \
