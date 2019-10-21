@@ -14,8 +14,8 @@ docker build -t rspamd .
 #### Run Container
 ```sh
 docker run -d \
-        -p 11332:11332 \  # port for postfix connection
-        -p 11334:11334 \  # web port
+        -p 11332:11332 \
+        -p 11334:11334 \
         -e WEB_PASSWORD=<password> \
         -e REDIS_SERVER=<redis host name> \
         -v <your-path>:/var/lib/rspamd/ \
