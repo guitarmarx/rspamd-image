@@ -19,4 +19,8 @@ chown -R rspamd:rspamd /etc/rspamd/
 crond &
 
 #### SERVICE START #####
+
+# wait for redis
+dockerize -wait tcp://$REDIS_SERVER:6379
+
 rspamd --no-fork -u rspamd -g rspamd -c /etc/rspamd/rspamd.conf
