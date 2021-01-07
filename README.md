@@ -1,4 +1,4 @@
-# Kopano-Image
+# RSPAMD-Image
 
 this docker image runs rspamd in porxy mode, an anti spam agent including a simple web gui.
 To use this image you need a running redis server.
