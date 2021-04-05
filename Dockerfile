@@ -1,4 +1,4 @@
-FROM alpine:3.12
+FROM alpine:3.13
 
 LABEL maintainer="meteorIT GbR Marcus Kastner"
 
@@ -14,6 +14,7 @@ ENV WEB_PASSWORD=password \
 	DOCKERIZE_VERSION=v0.6.1 \
 	REDIS_SERVER="<redisserver>" \
 	SPAM_HEADER="X-Spam-Status" \
+	SPAM_VALUE="Yes" \
 	REJECT_VALUE=9 \
 	ADD_HEADER_VALUE=5 \
 	GREYLIST_VALUE=4
