@@ -7,8 +7,9 @@ echo "0 * * * * /srv/scripts/importMail.sh" | crontab -
 WEB_PASSWORD=$(rspamadm pw -p $WEB_PASSWORD)
 dockerize -template /srv/templates/:/etc/rspamd/local.d/
 
-# add whitelist
+# add whitelists
 echo $DOMAIN_WHITELIST | tr -s ',' '\n' > /etc/rspamd/local.d/whitelist.sender.domain.map
+echo $IP_WHITELIST | tr -s ',' '\n' > /etc/rspamd/local.d/ip_whitelist.map
 
 #permissions
 mkdir -p /run/rspamd
