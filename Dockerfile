@@ -1,8 +1,6 @@
-FROM alpine:3.13
+FROM alpine:3.15
 
 LABEL maintainer="meteorIT GbR Marcus Kastner"
-
-VOLUME /var/lib/rspamd/
 
 EXPOSE 11332 11334
 
@@ -26,7 +24,9 @@ RUN apk update \
 #rsyslog
 
 # download dockerize
-RUN curl -L https://github.com/jwilder/dockerize/releases/download/$DOCKERIZE_VERSION/dockerize-linux-amd64-${DOCKERIZE_VERSION}.tar.gz --output /tmp/dockerize.tar.gz  \
+
+RUN curl -L https://github.com/jwilder/dockerize/releases/download/v0.6.1/dockerize-alpine-linux-amd64-v0.6.1.tar.gz --output /tmp/dockerize.tar.gz  \
+RUN curl -L https://github.com/jwilder/dockerize/releases/download/${DOCKERIZE_VERSION}/dockerize-alpine-linux-amd64-${DOCKERIZE_VERSION}.tar.gz --output /tmp/dockerize.tar.gz  \
 	&& tar -C /usr/local/bin -xzvf /tmp/dockerize.tar.gz \
 	&& rm /tmp/dockerize.tar.gz
 
