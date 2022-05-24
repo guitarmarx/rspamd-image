@@ -20,7 +20,7 @@ ENV WEB_PASSWORD=password \
 
 
 RUN apk update \
-	&& apk --no-cache add curl ca-certificates rspamd rspamd-controller rspamd-proxy curl \
+	&& apk --no-cache add curl ca-certificates rspamd rspamd-controller rspamd-proxy rspamd-client curl \
 	&&  rm -rf /var/cache/apk/*
 #rsyslog
 
