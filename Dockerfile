@@ -1,4 +1,4 @@
-FROM alpine:3.15
+FROM alpine:3.17
 
 LABEL maintainer="meteorIT GbR Marcus Kastner"
 
@@ -22,9 +22,6 @@ ENV WEB_PASSWORD=password \
 RUN apk update \
 	&& apk --no-cache add curl ca-certificates rspamd rspamd-controller rspamd-proxy rspamd-client curl \
 	&&  rm -rf /var/cache/apk/*
-#rsyslog
-
-# download dockerize
 
 RUN curl -L https://github.com/jwilder/dockerize/releases/download/v0.6.1/dockerize-alpine-linux-amd64-v0.6.1.tar.gz --output /tmp/dockerize.tar.gz  \
 RUN curl -L https://github.com/jwilder/dockerize/releases/download/${DOCKERIZE_VERSION}/dockerize-alpine-linux-amd64-${DOCKERIZE_VERSION}.tar.gz --output /tmp/dockerize.tar.gz  \
